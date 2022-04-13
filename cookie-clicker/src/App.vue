@@ -2,6 +2,7 @@
   <div>
     <div v-if="loginPressed === false & registrationPressed === false">
       <button @click="pressLogin">Login</button>
+      <br><br>
       <button @click="pressRegistration">Registration</button>
     </div>
     
@@ -39,6 +40,14 @@ export default {
 
     pressRegistration() {
       this.registrationPressed = !this.registrationPressed;
+    },
+
+    openClicker() {
+      
+    },
+
+    addUser() {
+
     },
   }
   
