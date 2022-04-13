@@ -1,6 +1,6 @@
 <template>
     <section>
-        <p> {{username}}'s cookies: {{ userCookies }}</p>
+        <p> {{username}}'s cookies: {{ tempUserCookies + cookies }}</p>
         <button @click="addCookie">Cookie</button>
     </section>
 </template>
@@ -11,18 +11,31 @@ export default {
         username: {
             Type: String,
             required: true
+        },
+
+        cookies: {
+            Type: Number,
+            required: true
         }
     },
 
     data() {
         return {
-            userCookies: 0      
+            tempUserCookies: 0      
         };
+    },
+
+    watch: {
+      userCookies() {
+          if (this.tempUserCookies === 100) {
+              this.$emit('update-cookies', this.tempUserCookies);
+          }
+      }  
     },
 
     methods: {
         addCookie() {
-            this.userCookies++;
+            this.tempUserCookies++;
         }
     }
 }

@@ -1,5 +1,10 @@
 <template>
   <div>
+    <header v-if="loginPressed === false & registrationPressed === false">
+      <h1>Welcome to the basic cookie clicker!!!</h1>
+      <h8>Learning project</h8>
+    </header>
+    <br>
     <div v-if="loginPressed === false & registrationPressed === false">
       <button @click="pressLogin">Login</button>
       <br><br>
@@ -13,7 +18,10 @@
         
     <registration-component v-if="registrationPressed === true"></registration-component>
     
-    <cookie-clicker v-if="cookieClickerOn === true"></cookie-clicker>
+    <cookie-clicker @update-cookies="updateUserCookies" v-if="cookieClickerOn === true"
+      :username="neededUsername"
+      :cookies="activeUserCookies"
+    ></cookie-clicker>
   </div>
 </template>
 
@@ -34,7 +42,8 @@ export default {
         }
       ],
       neededUsername: '',
-      activeUser: false
+      activeUser: false,
+      activeUserCookies: 0
     };
   },
 
@@ -53,9 +62,18 @@ export default {
       this.activeUser = true;
     },
 
-    addUser() {
-
+    updateUserCookies(cookies) {
+      for (let index = 0; index < this.userList.length; index++) {
+        if (this.neededUsername == this.userList[index].username) {
+          this.userList[index].cookies = cookies;
+          this.activeUserCookies = cookies;
+        }
+      }
     },
+
+    //addUser() {
+
+    //},
   }
   
 }
