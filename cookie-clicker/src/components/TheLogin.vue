@@ -25,8 +25,10 @@ export default {
     methods: {
         checkUserInfo() {
             for (let index = 0; index < this.users.length; index++) {
-                if (this.username === this.users[index].username && this.password === this.users[index].password) {
+                if (this.username == this.users[index].username && this.password === this.users[index].password) {
                     this.$emit('valid-user', this.username);
+                } else {
+                    alert("Not correct info");
                 }
             }
         }

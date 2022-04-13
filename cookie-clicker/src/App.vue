@@ -6,8 +6,11 @@
       <button @click="pressRegistration">Registration</button>
     </div>
     
-    <login-component v-if="loginPressed === true"></login-component>
     
+    <login-component @valid-user="openClicker" v-if="loginPressed === true && activeUser === false"
+      :users="this.userList"    
+    ></login-component>
+        
     <registration-component v-if="registrationPressed === true"></registration-component>
     
     <cookie-clicker v-if="cookieClickerOn === true"></cookie-clicker>
@@ -29,7 +32,9 @@ export default {
           email: 'john@gmail.com',
           cookies: 0
         }
-      ]
+      ],
+      neededUsername: '',
+      activeUser: false
     };
   },
 
@@ -42,8 +47,10 @@ export default {
       this.registrationPressed = !this.registrationPressed;
     },
 
-    openClicker() {
-      
+    openClicker(username) {
+      this.neededUsername = username;
+      this.cookieClickerOn = true;
+      this.activeUser = true;
     },
 
     addUser() {
