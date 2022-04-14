@@ -18,7 +18,7 @@
         
     <registration-component v-if="registrationPressed === true"></registration-component>
     
-    <cookie-clicker @update-cookies="updateUserCookies" v-if="cookieClickerOn === true"
+    <cookie-clicker @update-cookies="updateUserCookies" @logout-emit="logout" v-if="cookieClickerOn === true"
       :username="neededUsername"
       :cookies="activeUserCookies"
     ></cookie-clicker>
@@ -60,6 +60,11 @@ export default {
       this.neededUsername = username;
       this.cookieClickerOn = true;
       this.activeUser = true;
+      for (let index = 0; index < this.userList.length; index++) {
+        if (this.neededUsername == this.userList[index].username) {
+          this.activeUserCookies = this.userList[index].cookies;
+        }
+      }
     },
 
     updateUserCookies(cookies) {
@@ -70,6 +75,21 @@ export default {
         }
       }
     },
+
+    logout(cookies2) {
+      for (let index = 0; index < this.userList.length; index++) {
+        if (this.neededUsername == this.userList[index].username) {
+          this.userList[index].cookies += cookies2;
+        }
+      }
+
+      this.neededUsername = '';
+      this.activeUser = false;
+      this.activeUserCookies = 0;
+      this.loginPressed = false;
+      this.registrationPressed = false;
+      this.cookieClickerOn = false;
+    }
 
     //addUser() {
 

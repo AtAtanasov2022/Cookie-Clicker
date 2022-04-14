@@ -2,6 +2,8 @@
     <section>
         <p> {{username}}'s cookies: {{ tempUserCookies + cookies }}</p>
         <button @click="addCookie">Cookie</button>
+        <br><br>
+        <button @click="logout">Logout</button>
     </section>
 </template>
 
@@ -37,6 +39,10 @@ export default {
     methods: {
         addCookie() {
             this.tempUserCookies++;
+        },
+
+        logout() {
+            this.$emit('logout-emit', this.tempUserCookies);
         }
     }
 }
