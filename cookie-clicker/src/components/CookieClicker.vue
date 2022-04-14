@@ -26,9 +26,10 @@ export default {
     },
 
     watch: {
-      userCookies() {
+      tempUserCookies() {
           if (this.tempUserCookies === 100) {
               this.$emit('update-cookies', this.tempUserCookies);
+              this.tempUserCookies = 0;
           }
       }  
     },
