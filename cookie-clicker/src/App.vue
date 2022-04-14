@@ -16,7 +16,9 @@
       :users="this.userList"    
     ></login-component>
         
-    <registration-component v-if="registrationPressed === true"></registration-component>
+    <registration-component v-if="registrationPressed === true"
+      :users="userList"
+    ></registration-component>
     
     <cookie-clicker @update-cookies="updateUserCookies" @logout-emit="logout" v-if="cookieClickerOn === true"
       :username="neededUsername"
